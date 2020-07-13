@@ -1,0 +1,35 @@
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-image: url("Assets/sky.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.jumbotron {
+  animation: c 5s ease-in-out infinite alternate;
+  background-image: linear-gradient(
+    to bottom right,
+    lavenderblush,
+    paleturquoise
+  );
+}
+
+.list-group-item {
+  background-color: transparent;
+}
+
+.btn-light {
+  margin: 5px;
+  width: 100%;
+  color: #495057;
+}
+
+.btn-light:hover {
+  border-color: gray;
+  border-width: 2px;
+}
+
+#uvIndex {
+  border-style: none;
+}

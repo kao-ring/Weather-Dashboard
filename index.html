@@ -3,10 +3,164 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
+
+    <title>Weather Dashboard</title>
   </head>
   <body>
-    <h1>06 Server-Side APIs: Weather Dashboard</h1>
+    <header class="sticky-top p-3 mt-3 bg-dark text-white">
+      <h1 class="text-center">
+        Weather Dashboard
+      </h1>
+    </header>
+    <!-- GIVEN a weather dashboard with form inputs
+
+- User:     search for a city
+- Return:   current and future conditions for that city / that city is added to the search history
+
+- User:     I view current weather conditions for that city
+- Return:   1.the city name, 2.the date, 3.an icon representation of weather conditions, 
+            4.the temperature, 5.the humidity, 6.the wind speed, 7.and the UV index
+
+- User:     I view the UV index
+- Return:   I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
+
+- User:     I view future weather conditions for that city
+- Return:   I am presented with a 5-day forecast that displays 1.the date, 
+            2.an icon representation of weather conditions, 3.the temperature, and 4.the humidity
+
+- User:     I click on a city in the search history
+- Return:   I am again presented with current and future conditions for that city
+
+- User:     I open the weather dashboard
+- Return:   I am presented with the last searched city forecast -->
+
+    <div class="container-sm">
+      <!-- side section -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="jumbotron mt-3 mx-auto">
+            <div class="row">
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search City or Zip Code..."
+                  aria-label="Search City or Zip Code"
+                  aria-describedby="button-1"
+                />
+                <div class="input-group-append">
+                  <button
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    id="search-city-btn"
+                  >
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-2" />
+            <p>
+              Search History
+            </p>
+            <div class="container-btns align-center">
+              <button
+                type="button"
+                class="btn btn-light"
+                id="search-history-btn"
+              >
+                City Name Long
+              </button>
+              <button type="button" class="btn btn-light">City</button>
+              <button type="button" class="btn btn-light">City Name</button>
+            </div>
+          </div>
+        </div>
+        <!-- Main body ------------------------->
+        <div class="col-md-9">
+          <div class="jumbotron mt-3 mx-auto">
+            <h1 class="display-4 text-dark">City + date + icon</h1>
+            <ul class="list-group">
+              <li class="list-group-item">
+                Temperature:
+                <span id="temperature"></span>
+              </li>
+              <li class="list-group-item">
+                Humidity: <span id="humidity"></span>
+              </li>
+              <li class="list-group-item">
+                Wind Speed: <span id="windSpeed"></span>
+              </li>
+              <li class="list-group-item">
+                UV Index:
+                <span id="uvIndex"></span>
+              </li>
+            </ul>
+
+            <hr class="my-4" />
+            <!-- 5 day forecast---------------------------- -->
+            <h2 class="text-darks">5 Day Forecast</h2>
+            <div class="row justify-content-center">
+              <div id="day0" class="card-body mx-2 my-2 bg-dark">
+                <h5 id="0date">date</h5>
+                <p id="0five_day_temp">temp</p>
+                <p id="0five_day_humidity">humidity</p>
+                <img id="0five_day_icon" src="" />0five_day_icon
+              </div>
+              <div id="day1" class="card-body mx-2 my-2 bg-dark">
+                <h5 id="1date"></h5>
+                <p id="1five_day_temp"></p>
+                <p id="1five_day_humidity"></p>
+                <img id="1five_day_icon" src="" />
+              </div>
+              <div id="day2" class="card-body mx-2 my-2 bg-dark">
+                <h5 id="2date"></h5>
+                <p id="2five_day_temp"></p>
+                <p id="2five_day_humidity"></p>
+                <img id="2five_day_icon" src="" />
+              </div>
+              <div id="day3" class="card-body mx-2 my-2 bg-dark">
+                <h5 id="3date"></h5>
+                <p id="3five_day_temp"></p>
+                <p id="3five_day_humidity"></p>
+                <img id="3five_day_icon" src="" />
+              </div>
+              <div id="day4" class="card-body mx-2 my-2 bg-dark">
+                <h5 id="4date"></h5>
+                <p id="4five_day_temp"></p>
+                <p id="4five_day_humidity"></p>
+                <img id="4five_day_icon" src="" />
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="row current-condition"></div>
+        <div class="row 5-day-forecast"></div> -->
+        </div>
+      </div>
+    </div>
+    <!-- footer------------------------------------------------- -->
+    <footer
+      class="fixed-bottom py-3 m-0 border-warning text-center bg-dark text-white"
+    >
+      <small>&copy; Copyright Kaori Caplan 2020</small>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
