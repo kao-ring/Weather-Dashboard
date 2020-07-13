@@ -33,3 +33,10 @@ body {
 #uvIndex {
   border-style: none;
 }
+
+#search-city-input {
+  text-transform: capitalize;
+}
+#iconToday {
+  background-color: darkturquoise;
+}

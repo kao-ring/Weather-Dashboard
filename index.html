@@ -60,13 +60,10 @@
                   placeholder="Search City or Zip Code..."
                   aria-label="Search City or Zip Code"
                   aria-describedby="button-1"
+                  id="search-city-input"
                 />
                 <div class="input-group-append">
-                  <button
-                    class="btn btn-outline-secondary"
-                    type="button"
-                    id="search-city-btn"
-                  >
+                  <button class="btn btn-outline-secondary" type="button">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
@@ -93,7 +90,18 @@
         <!-- Main body ------------------------->
         <div class="col-md-9">
           <div class="jumbotron mt-3 mx-auto">
-            <h1 class="display-4 text-dark">City + date + icon</h1>
+            <div class="row" style="display :flex">
+              <div
+                class="display-4 text-dark"
+                id="weather-today"
+                style="float: left;"
+              >
+                City + date + icon
+                
+            </div><img id="iconToday" />
+              
+            </div class="row">
+
             <ul class="list-group">
               <li class="list-group-item">
                 Temperature:
@@ -114,37 +122,8 @@
             <hr class="my-4" />
             <!-- 5 day forecast---------------------------- -->
             <h2 class="text-darks">5 Day Forecast</h2>
-            <div class="row justify-content-center">
-              <div id="day0" class="card-body mx-2 my-2 bg-dark">
-                <h5 id="0date">date</h5>
-                <p id="0five_day_temp">temp</p>
-                <p id="0five_day_humidity">humidity</p>
-                <img id="0five_day_icon" src="" />0five_day_icon
-              </div>
-              <div id="day1" class="card-body mx-2 my-2 bg-dark">
-                <h5 id="1date"></h5>
-                <p id="1five_day_temp"></p>
-                <p id="1five_day_humidity"></p>
-                <img id="1five_day_icon" src="" />
-              </div>
-              <div id="day2" class="card-body mx-2 my-2 bg-dark">
-                <h5 id="2date"></h5>
-                <p id="2five_day_temp"></p>
-                <p id="2five_day_humidity"></p>
-                <img id="2five_day_icon" src="" />
-              </div>
-              <div id="day3" class="card-body mx-2 my-2 bg-dark">
-                <h5 id="3date"></h5>
-                <p id="3five_day_temp"></p>
-                <p id="3five_day_humidity"></p>
-                <img id="3five_day_icon" src="" />
-              </div>
-              <div id="day4" class="card-body mx-2 my-2 bg-dark">
-                <h5 id="4date"></h5>
-                <p id="4five_day_temp"></p>
-                <p id="4five_day_humidity"></p>
-                <img id="4five_day_icon" src="" />
-              </div>
+            <div class="row justify-content-center" id="fivedayforecast">
+              
             </div>
           </div>
 
