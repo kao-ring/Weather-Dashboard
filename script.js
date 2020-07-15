@@ -39,7 +39,7 @@ $("#clearBtn").on("click", function () {
 function currentCondition() {
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/weather?q=" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     cityValue +
     "&appid=" +
     APIkey +
@@ -66,7 +66,7 @@ function currentCondition() {
     var uvlat = response.coord.lat;
     var uvlon = response.coord.lon;
     var uvURL =
-      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+      "https://api.openweathermap.org/data/2.5/uvi?appid=" +
       APIkey +
       "&lat=" +
       uvlat +
@@ -104,7 +104,7 @@ function fiveDayForecast() {
 
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
   var queryURL =
-    "http://api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     cityValue +
     "&appid=" +
     APIkey +
