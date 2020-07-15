@@ -8,6 +8,14 @@ var fiveDayForecast = $(".5-day-forecast");
 var weatherToday = $("#weather-today");
 var currentCity = $("#current-city");
 var currentDate = $("#current-date");
+var cityValue;
+var weatherCondition;
+var temperature;
+var humidity;
+var windSpeed;
+var uvIndex;
+var uvCondition;
+var fiveDay;
 
 var searchCityBtn = $(".fas");
 var searchHistory = $("#search-history");
@@ -27,7 +35,7 @@ function initialize() {
     historyArray = storedCities;
   }
 
-  renderButtons();
+  // renderButtons();
 }
 
 //User input&Buttons========================================================
@@ -36,6 +44,7 @@ function initialize() {
 
 searchCityBtn.on("click", function (event) {
   event.preventDefault();
+  cityValue = searchCityInput.val();
 
   displayConditions();
   display5DayForecast();
@@ -48,24 +57,15 @@ searchCityBtn.on("click", function (event) {
 
 searchHistoryBtn.on("click", function (event) {
   event.preventDefault();
-
+  console.log("history button clicked");
   cityValue = $(this).val();
-  renderButtons();
+  displayConditions();
 });
 
 //Helper functions=========================================================
 
-var weatherCondition;
-var temperature;
-var humidity;
-var windSpeed;
-var uvIndex;
-var uvCondition;
-var fiveDay;
-var cityValue;
-
 function displayConditions() {
-  cityValue = searchCityInput.val();
+  // cityValue = searchCityInput.val();
 
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
   var queryURL =
@@ -125,23 +125,20 @@ function displayConditions() {
     ).text(response.name);
     searchHistory.prepend(newHistory);
   });
-
-  //UV index
-  // uvIndex http://api.openweathermap.org/data/2.5/uvi/forecast?appid={appid}&lat={lat}&lon={lon}&cnt={cnt}
 }
 
-function renderButtons() {
-  // $(searchHistoryBtn).empty();
-  for (var i = 0; i < movies.length; i++) {
-    var a = $(
-      '<button type="button" class="btn btn-light" id="searchHistoryBtn">' +
-        response.name +
-        "</button>"
-    );
+// function renderButtons() {
+//   // $(searchHistoryBtn).empty();
+//   for (var i = 0; i < historyArray.length; i++) {
+//     var a = $(
+//       '<button type="button" class="btn btn-light" id="searchHistoryBtn">' +
+//         response.name +
+//         "</button>"
+//     );
 
-    $(searchHistory).append(a);
-  }
-}
+//     $(searchHistory).append(a);
+//   }
+// }
 
 function display5DayForecast() {
   var cityValue = searchCityInput.val();
