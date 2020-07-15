@@ -133,7 +133,7 @@ function displayConditions() {
     //   displayConditions();
     // });
 
-    /*     historyBtn.click(function (event) {
+       historyBtn.click(function (event) {
       console.log(event);
       event.preventDefault();
       console.log("history button clicked");
@@ -141,7 +141,7 @@ function displayConditions() {
       //console.log("This is the city value " + cityValue);
       displayConditions();
     });
-    }); */
+    }); 
     /* var newHistory = $(
       '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
     ).text(response.name); */

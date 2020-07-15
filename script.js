@@ -6,12 +6,16 @@ var cityValue;
 var currentCity = $("#current-city");
 var currentDate = $("#current-date");
 
+var cityList = [];
+
 //Start here======================================================================
 searchBtn.on("click", function () {
   $("#fivedayforecast").empty(); //testing OK!!!
   cityValue = searchCityInput.val();
+  cityList.push(cityValue);
   currentCondition();
   fiveDayForecast();
+  renderButtons();
 });
 
 function currentCondition() {
@@ -104,3 +108,18 @@ function fiveDayForecast() {
     }
   });
 }
+
+function renderButtons() {
+  $("#search-history").empty();
+  for (var i = 0; i < cityList.length; i++) {
+    var a = $(
+      '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
+    );
+    a.text(cityList[i]);
+    $("#search-history").prepend(a);
+  }
+}
+
+// var newHistory = $(
+//   '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
+// ).text(response.name);
