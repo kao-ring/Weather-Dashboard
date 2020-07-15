@@ -8,6 +8,7 @@ var currentDate = $("#current-date");
 
 //Start here======================================================================
 searchBtn.on("click", function () {
+  $("#fivedayforecast").empty(); //testing OK!!!
   cityValue = searchCityInput.val();
   currentCondition();
   fiveDayForecast();
