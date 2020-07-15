@@ -56,6 +56,27 @@ body {
   font-size: 2em;
 }
 
+#clearBtn:hover {
+  font-size: 3em;
+}
+
 #forecast {
   border-radius: 20px;
+}
+
+.uvL:hover {
+  background-color: greenyellow;
+}
+
+.uvM:hover {
+  background-color: yellow;
+}
+.uvH:hover {
+  background-color: orange;
+}
+.uvVH:hover {
+  background-color: red;
+}
+.uvEX:hover {
+  background-color: darkviolet;
 }

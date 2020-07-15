@@ -78,10 +78,21 @@ function currentCondition() {
       url: uvURL,
       method: "GET",
     }).then(function (res) {
-      //   console.log("UV index");
-      //   console.log(res);
       var uvShisu = res.value.toFixed(0);
       $("#uvIndex").text(uvShisu);
+      console.log(uvShisu);
+      //uv index color
+      if (uvShisu < 3) {
+        $("#uv-color").removeClass().addClass("list-group-item uvL");
+      } else if (3 <= uvShisu && uvShisu <= 5) {
+        $("#uv-color").removeClass().addClass("list-group-item uvM");
+      } else if (6 <= uvShisu && uvShisu <= 7) {
+        $("#uv-color").removeClass().addClass("list-group-item uvH");
+      } else if (8 <= uvShisu && uvShisu <= 10) {
+        $("#uv-color").removeClass().addClass("list-group-item uvVH");
+      } else if (11 <= uvShisu) {
+        $("#uv-color").removeClass().addClass("list-group-item uvEX");
+      }
     });
   });
 }
