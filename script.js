@@ -27,7 +27,6 @@ searchBtn.on("click", function () {
   localStorage.setItem("cities", JSON.stringify(cityList));
 
   currentCondition();
-  fiveDayForecast();
   renderButtons();
 });
 
@@ -95,9 +94,12 @@ function currentCondition() {
       }
     });
   });
+
+  fiveDayForecast();
 }
 
 function fiveDayForecast() {
+  console.log("This is 5day forecast");
   $("#fivedayforecast").empty(); //testing ok
 
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
@@ -124,9 +126,11 @@ function fiveDayForecast() {
         response.list[i].dt_txt.split(" ")[0].split("-")[2];
 
       var newDate = $("<h5>").text(dt);
-      var newTemp = $("<p>").text("Temp:" + response.list[i].main.temp + "°F");
+      var newTemp = $("<p>").text(
+        "Tempature: " + response.list[i].main.temp + "°F"
+      );
       var newHumid = $("<p>").text(
-        "Humid:" + response.list[i].main.humidity + "%"
+        "Humidity: " + response.list[i].main.humidity + "%"
       );
       //get weather icon
       var iconNum = response.list[i].weather[0].icon;
@@ -146,8 +150,8 @@ function renderButtons() {
     var a = $('<button type="button" class="clbtn btn btn-light ">');
     a.text(cityList[i]);
     $("#search-history").prepend(a);
-    listClick();
   }
+  listClick();
 }
 
 function listClick() {
@@ -155,8 +159,7 @@ function listClick() {
     event.preventDefault();
     cityValue = $(this).text();
 
-    // $("#fivedayforecast").empty();
     currentCondition();
-    fiveDayForecast();
+    renderButtons();
   });
 }
