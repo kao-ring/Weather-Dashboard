@@ -8,7 +8,16 @@ var currentDate = $("#current-date");
 
 var cityList = [];
 
-// var cityListBtn = $("#city-list-btn");
+//get JASON from local storage
+jsonCall();
+
+function jsonCall() {
+  var storage = JSON.parse(localStorage.getItem("cities"));
+  if (storage !== null) {
+    cityList = storage;
+  }
+  renderButtons();
+}
 
 //Start here======================================================================
 searchBtn.on("click", function () {
@@ -16,6 +25,8 @@ searchBtn.on("click", function () {
   $("#fivedayforecast").empty(); //testing OK!!!
   cityValue = searchCityInput.val();
   cityList.push(cityValue);
+  localStorage.setItem("cities", JSON.stringify(cityList));
+
   currentCondition();
   fiveDayForecast();
   renderButtons();
@@ -125,9 +136,8 @@ function renderButtons() {
 function listClick() {
   $(".clbtn").on("click", function (event) {
     event.preventDefault();
-    console.log("cityListBtn clicked");
-
     cityValue = $(this).text();
-    console.log(cityValue);
+
+    currentCondition();
   });
 }
