@@ -38,7 +38,8 @@ body {
   text-transform: capitalize;
 }
 #iconToday {
-  background-color: white;
+  margin: 1em;
+  background-color: #17a2b8;
   border: 1px;
   border-radius: 20px;
   width: 100%;
@@ -47,4 +48,14 @@ body {
 #current-city {
   font-size: 3em;
   text-align: center;
+}
+
+#clearBtn {
+  border: azure;
+  border-radius: 5px;
+  font-size: 2em;
+}
+
+#forecast {
+  border-radius: 20px;
 }
