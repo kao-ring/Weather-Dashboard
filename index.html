@@ -25,27 +25,6 @@
         Weather Dashboard
       </h1>
     </header>
-    <!-- GIVEN a weather dashboard with form inputs
-
-- User:     search for a city
-- Return:   current and future conditions for that city / that city is added to the search history
-
-- User:     I view current weather conditions for that city
-- Return:   1.the city name, 2.the date, 3.an icon representation of weather conditions, 
-            4.the temperature, 5.the humidity, 6.the wind speed, 7.and the UV index
-
-- User:     I view the UV index
-- Return:   I am presented with a color that indicates whether the conditions are favorable, moderate, or severe
-
-- User:     I view future weather conditions for that city
-- Return:   I am presented with a 5-day forecast that displays 1.the date, 
-            2.an icon representation of weather conditions, 3.the temperature, and 4.the humidity
-
-- User:     I click on a city in the search history
-- Return:   I am again presented with current and future conditions for that city
-
-- User:     I open the weather dashboard
-- Return:   I am presented with the last searched city forecast -->
 
     <div class="container-sm">
       <!-- side section -->
@@ -74,33 +53,24 @@
             <p>
               Search History
             </p>
-            <div class="container-btns align-center">
-              <button
-                type="button"
-                class="btn btn-light"
-                id="search-history-btn"
-              >
-                City Name Long
-              </button>
-              <button type="button" class="btn btn-light">City</button>
-              <button type="button" class="btn btn-light">City Name</button>
-            </div>
+            <div class="container-btns align-center" id="search-history"></div>
           </div>
         </div>
         <!-- Main body ------------------------->
         <div class="col-md-9">
           <div class="jumbotron mt-3 mx-auto">
-            <div class="row" style="display :flex">
-              <div
-                class="display-4 text-dark"
-                id="weather-today"
-                style="float: left;"
-              >
-                City + date + icon
-                
-            </div><img id="iconToday" />
-              
-            </div class="row">
+            <div class="row">
+              <h3 class="text-dark" id="weather-today">
+                Curent Condition
+              </h3>
+            </div>
+            <div class="row">
+              <div class="col-9">
+                <p id="current-date">date</p>
+                <p id="current-city">City, Country</p>
+              </div>
+              <div class="col-3"><img id="iconToday" /></div>
+            </div>
 
             <ul class="list-group">
               <li class="list-group-item">
@@ -122,9 +92,7 @@
             <hr class="my-4" />
             <!-- 5 day forecast---------------------------- -->
             <h2 class="text-darks">5 Day Forecast</h2>
-            <div class="row justify-content-center" id="fivedayforecast">
-              
-            </div>
+            <div class="row justify-content-center" id="fivedayforecast"></div>
           </div>
 
           <!-- <div class="row current-condition"></div>

@@ -6,21 +6,38 @@ var searchHistory = $(".search-history");
 var currentCondition = $(".current-condition");
 var fiveDayForecast = $(".5-day-forecast");
 var weatherToday = $("#weather-today");
+var currentCity = $("#current-city");
+var currentDate = $("#current-date");
 
 var searchCityBtn = $(".fas");
-var searchHistoryBtn = $("#search-history-btn");
+var searchHistory = $("#search-history");
+var searchHistoryBtn = $("#searchHistoryBtn");
 var uvBtn = $("#uv-btn");
 var iconToday = $("#iconToday");
+var historyArray = [];
 
-var weatherArray = [];
+initialize();
+
+//initialize-get history data back to searchHistiryBtn
+// let storedCities = JSON.parse(localStorage.getItem("cities"));
+function initialize() {
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+  if (storedCities !== null) {
+    historyArray = storedCities;
+  }
+
+  renderButtons();
+}
+
 //User input&Buttons========================================================
 //     - User:     search for a city
 //     - Return:   current and future conditions for that city / that city is added to the search history
 
 searchCityBtn.on("click", function (event) {
   event.preventDefault();
-  console.log("kiki; searchCityBtn clicked");
-  displayCurrentCondition();
+
+  displayConditions();
   display5DayForecast();
 });
 
@@ -31,24 +48,26 @@ searchCityBtn.on("click", function (event) {
 
 searchHistoryBtn.on("click", function (event) {
   event.preventDefault();
-  console.log("kiki; searchHistoryBtn clicked");
-  displaySearchHistory();
+
+  cityValue = $(this).val();
+  renderButtons();
 });
 
 //Helper functions=========================================================
-var currentDate = moment().format("LLL");
+
 var weatherCondition;
 var temperature;
 var humidity;
 var windSpeed;
-var uvIndex; //
+var uvIndex;
 var uvCondition;
 var fiveDay;
+var cityValue;
 
-function displayCurrentCondition() {
-  var cityValue = searchCityInput.val();
+function displayConditions() {
+  cityValue = searchCityInput.val();
+
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
-
   var queryURL =
     "http://api.openweathermap.org/data/2.5/weather?q=" +
     cityValue +
@@ -61,21 +80,68 @@ function displayCurrentCondition() {
     method: "GET",
   }).then(function (response) {
     console.log(response);
-    weatherToday.text(response.name + currentDate);
+    // console.log(response.dt_text);
+
+    //current information
+    currentCity.text(response.name + ", " + response.sys.country);
+    // currentDate.text(moment.unix(response.dt).format("MM/DD h:mm a"));
+    currentDate.text(moment().format("LLL"));
+
     $("#temperature").text(response.main.temp);
     $("#humidity").text(response.main.humidity);
     $("#windSpeed").text(response.wind.speed);
+
     var iconNum = response.weather[0].icon;
-    // http://openweathermap.org/img/wn/10d@2x.png
     var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
     iconToday.attr("src", iconURL);
-    // $("#humidity").text(response.main.humidity);
-    // $("#uvIndex").text(response.main.humidity);
-    // uvIndex http://api.openweathermap.org/data/2.5/uvi/forecast?appid={appid}&lat={lat}&lon={lon}&cnt={cnt}
+
+    //for UV index
+    var uvlat = response.coord.lat;
+    var uvlon = response.coord.lon;
+    // http://api.openweathermap.org/data/2.5/uvi?appid={appid}&lat={lat}&lon={lon}
+    var uvURL =
+      "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+      APIkey +
+      "&lat=" +
+      uvlat +
+      "&lon=" +
+      uvlon;
+
+    $.ajax({
+      url: uvURL,
+      method: "GET",
+    }).then(function (res) {
+      console.log("UV index");
+      console.log(res);
+      $("#uvIndex").text(res.value);
+    });
+
+    //Store to the history
+    historyArray.push(response.name);
+    localStorage.setItem("cities", JSON.stringify(historyArray));
+
+    var newHistory = $(
+      '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
+    ).text(response.name);
+    searchHistory.prepend(newHistory);
   });
+
+  //UV index
+  // uvIndex http://api.openweathermap.org/data/2.5/uvi/forecast?appid={appid}&lat={lat}&lon={lon}&cnt={cnt}
 }
 
-function displaySearchHistory() {}
+function renderButtons() {
+  // $(searchHistoryBtn).empty();
+  for (var i = 0; i < movies.length; i++) {
+    var a = $(
+      '<button type="button" class="btn btn-light" id="searchHistoryBtn">' +
+        response.name +
+        "</button>"
+    );
+
+    $(searchHistory).append(a);
+  }
+}
 
 function display5DayForecast() {
   var cityValue = searchCityInput.val();
@@ -91,9 +157,8 @@ function display5DayForecast() {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
     var startIndex = Math.floor(new Date().getHours() / 3);
-    console.log(startIndex);
+
     for (let i = startIndex; i < response.list.length; i += 8) {
       var newCard = $(
         '<div id="day0" class="card-body mx-2 my-2 bg-dark text-white">'

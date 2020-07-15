@@ -38,5 +38,13 @@ body {
   text-transform: capitalize;
 }
 #iconToday {
-  background-color: darkturquoise;
+  background-color: white;
+  border: 1px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+#current-city {
+  font-size: 3em;
+  text-align: center;
 }
