@@ -21,8 +21,7 @@ function jsonCall() {
 
 //Start here======================================================================
 searchBtn.on("click", function () {
-  console.log("searchBtn clicked");
-  $("#fivedayforecast").empty(); //testing OK!!!
+  //   console.log("searchBtn clicked");
   cityValue = searchCityInput.val();
   cityList.push(cityValue);
   localStorage.setItem("cities", JSON.stringify(cityList));
@@ -30,6 +29,12 @@ searchBtn.on("click", function () {
   currentCondition();
   fiveDayForecast();
   renderButtons();
+});
+
+$("#clearBtn").on("click", function () {
+  localStorage.removeItem("cities");
+  cityList = [];
+  $("#search-history").empty();
 });
 
 function currentCondition() {
@@ -82,7 +87,8 @@ function currentCondition() {
 }
 
 function fiveDayForecast() {
-  var cityValue = searchCityInput.val();
+  $("#fivedayforecast").empty(); //testing ok
+
   var APIkey = "444a2add20a5be5b1aa0fd99ae23639f";
   var queryURL =
     "http://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -138,6 +144,8 @@ function listClick() {
     event.preventDefault();
     cityValue = $(this).text();
 
+    // $("#fivedayforecast").empty();
     currentCondition();
+    fiveDayForecast();
   });
 }
