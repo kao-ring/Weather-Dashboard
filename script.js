@@ -26,6 +26,7 @@ var historyArray = [];
 
 initialize();
 
+console.log(historyArray);
 //initialize-get history data back to searchHistiryBtn
 // let storedCities = JSON.parse(localStorage.getItem("cities"));
 function initialize() {
@@ -55,10 +56,11 @@ searchCityBtn.on("click", function (event) {
 //     - Return:   1.the city name, 2.the date, 3.an icon representation of weather conditions,
 //                 4.the temperature, 5.the humidity, 6.the wind speed, 7.and the UV index
 
-searchHistoryBtn.on("click", function (event) {
+searchHistory.on("click", function (event) {
   event.preventDefault();
   console.log("history button clicked");
-  cityValue = $(this).val();
+  cityValue = $(this).text();
+  console.log(cityValue);
   displayConditions();
 });
 
@@ -87,9 +89,9 @@ function displayConditions() {
     // currentDate.text(moment.unix(response.dt).format("MM/DD h:mm a"));
     currentDate.text(moment().format("LLL"));
 
-    $("#temperature").text(response.main.temp);
-    $("#humidity").text(response.main.humidity);
-    $("#windSpeed").text(response.wind.speed);
+    $("#temperature").text(response.main.temp.toFixed(1));
+    $("#humidity").text(response.main.humidity + "%");
+    $("#windSpeed").text(response.wind.speed + "mph");
 
     var iconNum = response.weather[0].icon;
     var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
