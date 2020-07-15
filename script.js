@@ -55,7 +55,7 @@ function currentCondition() {
     currentDate.text(moment().format("LLL"));
     //get weather icon
     var iconNum = response.weather[0].icon;
-    var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
+    var iconURL = "https://openweathermap.org/img/wn/" + iconNum + "@2x.png";
     $("#iconToday").attr("src", iconURL);
     $("#iconToday").attr("alt", "weather-icon");
 
@@ -134,7 +134,7 @@ function fiveDayForecast() {
       );
       //get weather icon
       var iconNum = response.list[i].weather[0].icon;
-      var iconURL = "http://openweathermap.org/img/wn/" + iconNum + "@2x.png";
+      var iconURL = "https://openweathermap.org/img/wn/" + iconNum + "@2x.png";
       var newIcon = $('<img id="newIcon">').attr("src", iconURL);
       $("#iconToday").attr("alt", "weather-icon");
 
