@@ -8,8 +8,11 @@ var currentDate = $("#current-date");
 
 var cityList = [];
 
+// var cityListBtn = $("#city-list-btn");
+
 //Start here======================================================================
 searchBtn.on("click", function () {
+  console.log("searchBtn clicked");
   $("#fivedayforecast").empty(); //testing OK!!!
   cityValue = searchCityInput.val();
   cityList.push(cityValue);
@@ -31,7 +34,7 @@ function currentCondition() {
     url: queryURL,
     method: "GET",
   }).then(function (response) {
-    console.log(response);
+    // console.log(response);
 
     currentCity.text(response.name + ", " + response.sys.country);
     currentDate.text(moment().format("LLL"));
@@ -59,8 +62,8 @@ function currentCondition() {
       url: uvURL,
       method: "GET",
     }).then(function (res) {
-      console.log("UV index");
-      console.log(res);
+      //   console.log("UV index");
+      //   console.log(res);
       var uvShisu = res.value.toFixed(0);
       $("#uvIndex").text(uvShisu);
     });
@@ -82,7 +85,7 @@ function fiveDayForecast() {
     method: "GET",
   }).then(function (response) {
     var startIndex = Math.floor(new Date().getHours() / 3);
-    console.log(response);
+    // console.log(response);
     for (let i = startIndex; i < response.list.length; i += 8) {
       var newCard = $(
         '<div id="forecast" class="card-body mx-2 my-2 bg-info text-white">'
@@ -112,14 +115,19 @@ function fiveDayForecast() {
 function renderButtons() {
   $("#search-history").empty();
   for (var i = 0; i < cityList.length; i++) {
-    var a = $(
-      '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
-    );
+    var a = $('<button type="button" class="clbtn btn btn-light ">');
     a.text(cityList[i]);
     $("#search-history").prepend(a);
+    listClick();
   }
 }
 
-// var newHistory = $(
-//   '<button type="button" class="btn btn-light" id="searchHistoryBtn">'
-// ).text(response.name);
+function listClick() {
+  $(".clbtn").on("click", function (event) {
+    event.preventDefault();
+    console.log("cityListBtn clicked");
+
+    cityValue = $(this).text();
+    console.log(cityValue);
+  });
+}
